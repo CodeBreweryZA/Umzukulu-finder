@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - EternalRest</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-monument"></i>
+                <span>EternalRest</span>
+            </a>
+            <div class="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="services.html" class="active">Services</a>
+                <a href="contact.html">Contact</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#" class="btn-login" id="loginBtn">Sign In</a>
+                <a href="#" class="btn-primary" id="registerBtn">Get Started</a>
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Services Hero -->
+    <section class="services-hero">
+        <div class="container">
+            <h1>Comprehensive Memorial Care Services</h1>
+            <p>We offer a range of services to help you honor and maintain your loved ones' resting places, even when you can't be there in person.</p>
+        </div>
+    </section>
+
+    <!-- Services List -->
+    <section class="services-list">
+        <div class="container">
+            <div class="service-category">
+                <div class="service-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <div class="service-content">
+                    <h2>Regular Burial Plot Maintenance</h2>
+                    <p>Ensure your loved ones' resting places are always well-kept with our professional maintenance services.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Weekly, monthly, or quarterly maintenance plans</li>
+                        <li><i class="fas fa-check"></i> Grass trimming and weed control</li>
+                        <li><i class="fas fa-check"></i> Gravestone cleaning and preservation</li>
+                        <li><i class="fas fa-check"></i> Seasonal decoration placement and removal</li>
+                        <li><i class="fas fa-check"></i> Photo verification after each service</li>
+                    </ul>
+                    <div class="service-pricing">
+                        <h3>Starting at $49/month</h3>
+                        <button class="btn-primary" id="bookMaintenanceBtn">Book Maintenance Service</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="service-category">
+                <div class="service-icon">
+                    <i class="fas fa-spa"></i>
+                </div>
+                <div class="service-content">
+                    <h2>Flower Placement & Arrangement Services</h2>
+                    <p>Keep the memorial site beautiful with fresh flowers arranged with care and respect.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Fresh flower delivery and placement</li>
+                        <li><i class="fas fa-check"></i> Seasonal floral arrangements</li>
+                        <li><i class="fas fa-check"></i> Artificial flower cleaning and replacement</li>
+                        <li><i class="fas fa-check"></i> Special occasion arrangements (birthdays, anniversaries)</li>
+                        <li><i class="fas fa-check"></i> Custom arrangements based on your preferences</li>
+                    </ul>
+                    <div class="service-pricing">
+                        <h3>Starting at $29/delivery</h3>
+                        <button class="btn-primary" id="bookFlowersBtn">Book Flower Service</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="service-category">
+                <div class="service-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="service-content">
+                    <h2>Visit Confirmation Services</h2>
+                    <p>When you can't visit in person, our representatives can visit the site on your behalf and provide confirmation.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Scheduled memorial site visits</li>
+                        <li><i class="fas fa-check"></i> Photo documentation of the site condition</li>
+                        <li><i class="fas fa-check"></i> Placement of personal items or messages</li>
+                        <li><i class="fas fa-check"></i> Detailed visit report with observations</li>
+                        <li><i class="fas fa-check"></i> Emergency visit service for urgent situations</li>
+                    </ul>
+                    <div class="service-pricing">
+                        <h3>Starting at $39/visit</h3>
+                        <button class="btn-primary" id="bookVisitBtn">Book Visit Service</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="service-category">
+                <div class="service-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="service-content">
+                    <h2>Premium Memorial Care Package</h2>
+                    <p>Our comprehensive package that includes all services for complete peace of mind.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Bi-weekly maintenance and cleaning</li>
+                        <li><i class="fas fa-check"></i> Monthly fresh flower arrangements</li>
+                        <li><i class="fas fa-check"></i> Quarterly detailed visit with report</li>
+                        <li><i class="fas fa-check"></i> Priority emergency service</li>
+                        <li><i class="fas fa-check"></i> Annual deep cleaning and preservation</li>
+                        <li><i class="fas fa-check"></i> Digital memorial page with unlimited photos</li>
+                    </ul>
+                    <div class="service-pricing">
+                        <h3>$199/month (Save 20%)</h3>
+                        <button class="btn-primary" id="bookPremiumBtn">Book Premium Package</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="service-process">
+        <div class="container">
+            <h2>How Our Services Work</h2>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>Select Service</h3>
+                    <p>Choose from our range of memorial care services based on your needs.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>Schedule & Customize</h3>
+                    <p>Pick your preferred schedule and customize the service details.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>Service Execution</h3>
+                    <p>Our trained professionals perform the service with care and respect.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>Confirmation & Report</h3>
+                    <p>Receive photo confirmation and a detailed report of the service completed.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Ensure Proper Care for Your Loved Ones' Resting Places?</h2>
+            <p>Sign up today and book your first service with a 15% discount.</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn-primary btn-large" id="signupServicesBtn">
+                    <i class="fas fa-user-plus"></i> Sign Up for Services
+                </a>
+                <a href="#" class="btn-secondary btn-large" id="contactServicesBtn">
+                    <i class="fas fa-question-circle"></i> Have Questions?
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-monument"></i>
+                    <span>Umzukulu^Finder</span>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="services.html">Services</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                    <a href="#">Contact Us</a>
+                </div>
+                <div class="footer-contact">
+                    <p><i class="fas fa-phone"></i> (+27) 68 235 7541</p>
+                    <p><i class="fas fa-envelope"></i> support@umzukulufinder.com</p>
+                    <p><i class="fas fa-envelope"></i> landisodipho.phaahla@gmail.com</p>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2023 Umzukulu^Finder. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script>
+        // Services page specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Setup event listeners for service booking buttons
+            const serviceButtons = [
+                'bookMaintenanceBtn',
+                'bookFlowersBtn', 
+                'bookVisitBtn',
+                'bookPremiumBtn',
+                'signupServicesBtn'
+            ];
+            
+            serviceButtons.forEach(buttonId => {
+                const button = document.getElementById(buttonId);
+                if (button) {
+                    button.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        
+                        // Check if user is logged in
+                        const user = localStorage.getItem('eternalRestUser');
+                        if (user) {
+                            // Redirect to dashboard to book service
+                            window.location.href = 'dashboard.html';
+                            showNotification('Redirecting to dashboard to book service...', 'info');
+                        } else {
+                            // Open auth modal
+                            openModal('auth');
+                            showNotification('Please sign in or create an account to book services', 'info');
+                        }
+                    });
+                }
+            });
+            
+            // Contact button
+            const contactBtn = document.getElementById('contactServicesBtn');
+            if (contactBtn) {
+                contactBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showNotification('Contact feature would open here in the full application', 'info');
+                });
+            }
+            
+            // Reuse functions from main app
+            function openModal(modalType) {
+                // This would open the auth modal
+                // For simplicity, we'll just show a notification
+                showNotification('Authentication modal would open here', 'info');
+            }
+            
+            function showNotification(message, type = 'info') {
+                // Reuse notification code from app.js
+                const existingNotification = document.querySelector('.notification');
+                if (existingNotification) {
+                    existingNotification.remove();
+                }
+                
+                const notification = document.createElement('div');
+                notification.className = `notification notification-${type}`;
+                
+                let icon = 'info-circle';
+                if (type === 'success') icon = 'check-circle';
+                if (type === 'error') icon = 'exclamation-circle';
+                
+                notification.innerHTML = `
+                    <i class="fas fa-${icon}"></i>
+                    <span>${message}</span>
+                    <button class="notification-close">&times;</button>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                if (!document.getElementById('notification-styles')) {
+                    const style = document.createElement('style');
+                    style.id = 'notification-styles';
+                    style.textContent = `
+                        .notification {
+                            position: fixed;
+                            top: 20px;
+                            right: 20px;
+                            background-color: #d1ecf1;
+                            color: #0c5460;
+                            padding: 15px 20px;
+                            border-radius: 5px;
+                            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                            z-index: 3000;
+                            max-width: 400px;
+                            animation: slideIn 0.3s ease;
+                        }
+                        .notification-success {
+                            background-color: #d4edda;
+                            color: #155724;
+                        }
+                        .notification-error {
+                            background-color: #f8d7da;
+                            color: #721c24;
+                        }
+                        @keyframes slideIn {
+                            from { transform: translateX(100%); opacity: 0; }
+                            to { transform: translateX(0); opacity: 1; }
+                        }
+                        @keyframes slideOut {
+                            from { transform: translateX(0); opacity: 1; }
+                            to { transform: translateX(100%); opacity: 0; }
+                        }
+                        .notification-close {
+                            background: none;
+                            border: none;
+                            font-size: 1.5rem;
+                            cursor: pointer;
+                            margin-left: auto;
+                            color: inherit;
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }
+                
+                const closeBtn = notification.querySelector('.notification-close');
+                closeBtn.addEventListener('click', () => {
+                    notification.style.animation = 'slideOut 0.3s ease';
+                    setTimeout(() => notification.remove(), 300);
+                });
+                
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.style.animation = 'slideOut 0.3s ease';
+                        setTimeout(() => notification.remove(), 300);
+                    }
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Umzukulu^Finder</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-monument"></i>
+                <span>Umzukulu^Finder</span>
+            </a>
+            <div class="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="contact.html">Contact</a>
+                <a href="services.html">Services</a>
+                <a href="#" class="btn-login" id="logoutBtn">Logout</a>
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Dashboard -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-info">
+                    <h3 id="userName">User Name</h3>
+                    <p id="userEmail">user@example.com</p>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="memorials">
+                    <i class="fas fa-monument"></i>
+                    <span>My Memorials</span>
+                </a>
+                <a href="#" class="nav-item" data-section="map">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span>Memorial Map</span>
+                </a>
+                <a href="#" class="nav-item" data-section="services">
+                    <i class="fas fa-concierge-bell"></i>
+                    <span>My Services</span>
+                </a>
+                <a href="#" class="nav-item" data-section="visits">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Visit Confirmations</span>
+                </a>
+                <a href="#" class="nav-item" data-section="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn-primary btn-block" id="addNewMemorialBtn">
+                    <i class="fas fa-plus"></i> Add New Memorial
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Memorials Section -->
+            <section class="dashboard-section active" id="memorialsSection">
+                <div class="section-header">
+                    <h2>My Memorials</h2>
+                    <div class="section-actions">
+                        <button class="btn-secondary" id="filterMemorialsBtn">
+                            <i class="fas fa-filter"></i> Filter
+                        </button>
+                        <button class="btn-primary" id="addMemorialBtn">
+                            <i class="fas fa-plus"></i> Add Memorial
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="memorials-grid" id="memorialsList">
+                    <!-- Memorial cards will be dynamically inserted here -->
+                    <div class="empty-state">
+                        <i class="fas fa-monument"></i>
+                        <h3>No Memorials Yet</h3>
+                        <p>Add your first memorial to get started.</p>
+                        <button class="btn-primary" id="addFirstMemorialBtn">Add Your First Memorial</button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Map Section -->
+            <section class="dashboard-section" id="mapSection">
+                <div class="section-header">
+                    <h2>Memorial Map</h2>
+                    <div class="map-actions">
+                        <button class="btn-secondary" id="zoomInBtn">
+                            <i class="fas fa-search-plus"></i>
+                        </button>
+                        <button class="btn-secondary" id="zoomOutBtn">
+                            <i class="fas fa-search-minus"></i>
+                        </button>
+                        <button class="btn-secondary" id="locateMeBtn">
+                            <i class="fas fa-location-dot"></i> My Location
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="map-container">
+                    <div id="dashboardMap"></div>
+                </div>
+                
+                <div class="map-sidebar">
+                    <h3>Memorials on Map</h3>
+                    <div class="map-memorials-list" id="mapMemorialsList">
+                        <!-- Memorial list for map will be dynamically inserted here -->
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Services Section -->
+            <section class="dashboard-section" id="servicesSection">
+                <div class="section-header">
+                    <h2>My Services</h2>
+                    <button class="btn-primary" id="bookServiceBtn">
+                        <i class="fas fa-plus"></i> Book New Service
+                    </button>
+                </div>
+                
+                <div class="services-container">
+                    <div class="service-categories">
+                        <div class="service-category active" data-category="all">All Services</div>
+                        <div class="service-category" data-category="maintenance">Maintenance</div>
+                        <div class="service-category" data-category="flowers">Flowers</div>
+                        <div class="service-category" data-category="visits">Visits</div>
+                    </div>
+                    
+                    <div class="services-list" id="servicesList">
+                        <!-- Services will be dynamically inserted here -->
+                        <div class="empty-state">
+                            <i class="fas fa-concierge-bell"></i>
+                            <h3>No Services Booked</h3>
+                            <p>Book your first service to ensure proper care of memorial sites.</p>
+                            <button class="btn-primary" id="bookFirstServiceBtn">Book a Service</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Visits Section -->
+            <section class="dashboard-section" id="visitsSection">
+                <div class="section-header">
+                    <h2>Visit Confirmations</h2>
+                    <button class="btn-primary" id="logVisitBtn">
+                        <i class="fas fa-check-circle"></i> Log New Visit
+                    </button>
+                </div>
+                
+                <div class="visits-container" id="visitsList">
+                    <!-- Visits will be dynamically inserted here -->
+                    <div class="empty-state">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>No Visits Logged</h3>
+                        <p>Log your first visit to a memorial site to keep track of your visits.</p>
+                        <button class="btn-primary" id="logFirstVisitBtn">Log Your First Visit</button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Settings Section -->
+            <section class="dashboard-section" id="settingsSection">
+                <div class="section-header">
+                    <h2>Account Settings</h2>
+                </div>
+                
+                <div class="settings-container">
+                    <div class="settings-card">
+                        <h3>Profile Information</h3>
+                        <form id="profileForm">
+                            <div class="form-group">
+                                <label for="profileName">Full Name</label>
+                                <input type="text" id="profileName" value="John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label for="profileEmail">Email</label>
+                                <input type="email" id="profileEmail" value="john@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="profilePhone">Phone Number</label>
+                                <input type="tel" id="profilePhone" value="+1 (123) 456-7890">
+                            </div>
+                            <button type="submit" class="btn-primary">Update Profile</button>
+                        </form>
+                    </div>
+                    
+                    <div class="settings-card">
+                        <h3>Change Password</h3>
+                        <form id="passwordForm">
+                            <div class="form-group">
+                                <label for="currentPassword">Current Password</label>
+                                <input type="password" id="currentPassword">
+                            </div>
+                            <div class="form-group">
+                                <label for="newPassword">New Password</label>
+                                <input type="password" id="newPassword">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmNewPassword">Confirm New Password</label>
+                                <input type="password" id="confirmNewPassword">
+                            </div>
+                            <button type="submit" class="btn-primary">Change Password</button>
+                        </form>
+                    </div>
+                    
+                    <div class="settings-card">
+                        <h3>Notification Preferences</h3>
+                        <div class="notification-setting">
+                            <div>
+                                <h4>Service Reminders</h4>
+                                <p>Get reminders for scheduled services</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="notification-setting">
+                            <div>
+                                <h4>Visit Confirmations</h4>
+                                <p>Get notifications when visits are logged</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="notification-setting">
+                            <div>
+                                <h4>Memorial Anniversaries</h4>
+                                <p>Get reminders for memorial anniversaries</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Add Memorial Modal -->
+    <div class="modal" id="addMemorialModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add a Memorial</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="memorialForm">
+                    <div class="form-group">
+                        <label for="memorialName">Deceased Full Name *</label>
+                        <input type="text" id="memorialName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="memorialSurname">Surname/Family Name *</label>
+                        <input type="text" id="memorialSurname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dateOfPassing">Date of Passing</label>
+                        <input type="date" id="dateOfPassing">
+                    </div>
+                    <div class="form-group">
+                        <label for="memorialMessage">Memorial Message</label>
+                        <textarea id="memorialMessage" rows="3" placeholder="Share a memory or message..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="memorialLocation">Location Details</label>
+                        <input type="text" id="memorialLocation" placeholder="Cemetery name, section, plot number">
+                    </div>
+                    <div class="form-group">
+                        <label>Plot Coordinates</label>
+                        <div class="coordinates-input">
+                            <input type="text" id="memorialLat" placeholder="Latitude">
+                            <input type="text" id="memorialLng" placeholder="Longitude">
+                        </div>
+                        <button type="button" class="btn-secondary" id="getCurrentLocation">
+                            <i class="fas fa-location-dot"></i> Use Current Location
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <label for="memorialPhoto">Add Photo (optional)</label>
+                        <input type="file" id="memorialPhoto" accept="image/*">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" id="cancelMemorial">Cancel</button>
+                        <button type="submit" class="btn-primary">Save Memorial</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service Booking Modal -->
+    <div class="modal" id="serviceModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Book a Service</h3>
+                <button class="close-modal" id="closeServiceModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="serviceForm">
+                    <div class="form-group">
+                        <label for="serviceType">Service Type *</label>
+                        <select id="serviceType" required>
+                            <option value="">Select a service</option>
+                            <option value="maintenance">Regular Plot Maintenance</option>
+                            <option value="flowers">Flower Placement & Arrangement</option>
+                            <option value="cleaning">Headstone Cleaning</option>
+                            <option value="visit">Confirmed Visit</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceMemorial">Select Memorial *</label>
+                        <select id="serviceMemorial" required>
+                            <option value="">Select a memorial</option>
+                            <!-- Memorials will be populated dynamically -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceDate">Service Date *</label>
+                        <input type="date" id="serviceDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceFrequency">Frequency</label>
+                        <select id="serviceFrequency">
+                            <option value="once">One Time</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                            <option value="quarterly">Quarterly</option>
+                            <option value="yearly">Yearly</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceNotes">Special Instructions</label>
+                        <textarea id="serviceNotes" rows="3" placeholder="Any special instructions or requests..."></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" id="cancelService">Cancel</button>
+                        <button type="submit" class="btn-primary">Book Service</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
