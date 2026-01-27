@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Umzukulu^Finder</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/contact.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-monument"></i>
+                <span>Umzukulu^Finder</span>
+            </a>
+            <div class="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="contact.html" class="active">Contact</a>
+                <a href="#" class="btn-login" id="loginBtn">Sign In</a>
+                <a href="#" class="btn-primary" id="registerBtn">Get Started</a>
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Contact Hero -->
+    <section class="contact-hero">
+        <div class="container">
+            <h1>We're Here to Help You</h1>
+            <p>Have questions about our services or need assistance? Our dedicated team is ready to support you in preserving the memories of your loved ones.</p>
+        </div>
+    </section>
+
+    <!-- Contact Information -->
+    <section class="contact-info">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Office Hours -->
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="far fa-clock"></i>
+                    </div>
+                    <h3>Office Hours</h3>
+                    <div class="office-hours">
+                        <div class="day-time">
+                            <span class="day">Monday - Friday</span>
+                            <span class="time">09:00 - 17:00</span>
+                        </div>
+                        <div class="day-time">
+                            <span class="day">Saturday</span>
+                            <span class="time">09:00 - 13:00</span>
+                        </div>
+                        <div class="day-time">
+                            <span class="day">Sunday</span>
+                            <span class="time">Emergency Only</span>
+                        </div>
+                        <p class="timezone"><i class="fas fa-globe"></i> South Africa Standard Time (SAST)</p>
+                    </div>
+                </div>
+
+                <!-- Contact Numbers -->
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>Contact Numbers</h3>
+                    <div class="contact-numbers">
+                        <div class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <div>
+                                <p class="label">Office Line</p>
+                                <a href="tel:0112345678" class="number">011 234 5678</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-mobile-alt"></i>
+                            <div>
+                                <p class="label">Emergency Line</p>
+                                <a href="tel:0682357541" class="number">068 235 7541</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-whatsapp"></i>
+                            <div>
+                                <p class="label">WhatsApp</p>
+                                <a href="https://wa.me/27682357541" target="_blank" class="number">068 235 7541</a>
+                                <p class="whatsapp-note"><i class="fas fa-comment"></i> Quick responses during business hours</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Email Contacts -->
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="far fa-envelope"></i>
+                    </div>
+                    <h3>Email Contacts</h3>
+                    <div class="email-contacts">
+                        <div class="email-item">
+                            <i class="fas fa-headset"></i>
+                            <div>
+                                <p class="label">General Support</p>
+                                <a href="mailto:support@umzukulufinder.co.za" class="email">support@umzukulufinder.co.za</a>
+                            </div>
+                        </div>
+                        <div class="email-item">
+                            <i class="fas fa-code"></i>
+                            <div>
+                                <p class="label">Technical Developer</p>
+                                <a href="mailto:landisodimpho.phaaahla@gmail.com" class="email">landisodimpho.phaaahla@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="email-item">
+                            <i class="fas fa-user-tie"></i>
+                            <div>
+                                <p class="label">Project Director</p>
+                                <a href="mailto:xolani.skhumbuzonkosi@gmail.com" class="email">xolani.skhumbuzonkosi@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="contact-form-section">
+        <div class="container">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>Send Us a Message</h2>
+                    <p>Fill out the form below and we'll get back to you within 24 hours during business days.</p>
+                </div>
+                
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contactName">Full Name *</label>
+                            <input type="text" id="contactName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactEmail">Email Address *</label>
+                            <input type="email" id="contactEmail" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contactPhone">Phone Number</label>
+                            <input type="tel" id="contactPhone">
+                        </div>
+                        <div class="form-group">
+                            <label for="contactSubject">Subject *</label>
+                            <select id="contactSubject" required>
+                                <option value="">Select a subject</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="support">Technical Support</option>
+                                <option value="service">Service Information</option>
+                                <option value="billing">Billing Inquiry</option>
+                                <option value="emergency">Emergency Assistance</option>
+                                <option value="feedback">Feedback/Suggestions</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactMessage">Message *</label>
+                        <textarea id="contactMessage" rows="6" required placeholder="Please provide details about your inquiry..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactUrgency">Urgency Level</label>
+                        <div class="urgency-levels">
+                            <label class="urgency-option">
+                                <input type="radio" name="urgency" value="low" checked>
+                                <span class="urgency-label low">
+                                    <i class="far fa-clock"></i> Low (Reply within 48 hours)
+                                </span>
+                            </label>
+                            <label class="urgency-option">
+                                <input type="radio" name="urgency" value="normal">
+                                <span class="urgency-label normal">
+                                    <i class="fas fa-exclamation-circle"></i> Normal (Reply within 24 hours)
+                                </span>
+                            </label>
+                            <label class="urgency-option">
+                                <input type="radio" name="urgency" value="high">
+                                <span class="urgency-label high">
+                                    <i class="fas fa-exclamation-triangle"></i> High (Reply within 6 hours)
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="contactNewsletter" checked>
+                        <label for="contactNewsletter">Subscribe to our newsletter for updates and tips on memorial care</label>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary btn-large">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        How quickly will I receive a response to my inquiry?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We aim to respond to all inquiries within 24 hours during business days. Emergency inquiries receive priority response within 2-6 hours. Responses may be slightly delayed on weekends and public holidays.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        What qualifies as an emergency?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Emergencies include: immediate burial plot issues requiring attention, urgent service requests, critical technical problems preventing access to memorial information, or time-sensitive memorial arrangements. For emergencies, please call our emergency line.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Do you offer after-hours support?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, we offer limited after-hours support for emergencies only. Our emergency line (068 235 7541) is monitored 24/7 for urgent matters. Non-emergency inquiries received after hours will be addressed the next business day.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        How do I update my contact information?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>You can update your contact information directly in your dashboard under Account Settings. If you're having trouble, email our support team at support@umzukulufinder.co.za with your updated details.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Can I schedule a call with your team?
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! Please indicate in your message that you'd like to schedule a call, and our team will coordinate a suitable time. You can also use our WhatsApp number to quickly arrange a call during business hours.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map & Location -->
+    <section class="location-section">
+        <div class="container">
+            <h2>Our Virtual Office</h2>
+            <p class="location-description">While we operate primarily as a digital platform to serve you nationwide, our core team is based in South Africa with representatives available to assist across the country.</p>
+            
+            <div class="location-grid">
+                <div class="location-info">
+                    <h3>Service Coverage Areas</h3>
+                    <div class="coverage-areas">
+                        <div class="coverage-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Gauteng Region</span>
+                        </div>
+                        <div class="coverage-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Western Cape</span>
+                        </div>
+                        <div class="coverage-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>KwaZulu-Natal</span>
+                        </div>
+                        <div class="coverage-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Eastern Cape</span>
+                        </div>
+                        <div class="coverage-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Free State</span>
+                        </div>
+                        <div class="coverage-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Nationwide Digital Support</span>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-methods">
+                        <h4>Preferred Contact Methods</h4>
+                        <div class="method-item">
+                            <i class="fab fa-whatsapp"></i>
+                            <div>
+                                <p><strong>WhatsApp:</strong> Fastest response for quick questions</p>
+                                <p class="method-note">Best for: Service inquiries, quick questions, scheduling</p>
+                            </div>
+                        </div>
+                        <div class="method-item">
+                            <i class="far fa-envelope"></i>
+                            <div>
+                                <p><strong>Email:</strong> Detailed support and documentation</p>
+                                <p class="method-note">Best for: Technical issues, detailed inquiries, attachments</p>
+                            </div>
+                        </div>
+                        <div class="method-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <p><strong>Phone:</strong> Direct conversation for complex matters</p>
+                                <p class="method-note">Best for: Urgent matters, complex discussions, elderly users</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="location-map">
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <h3>Nationwide Digital Service</h3>
+                        <p>Our digital platform allows us to serve memorial sites across South Africa</p>
+                        <div class="sa-flag">
+                            <div class="flag-green"></div>
+                            <div class="flag-white"></div>
+                            <div class="flag-blue"></div>
+                            <div class="flag-yellow"></div>
+                            <div class="flag-black"></div>
+                            <div class="flag-red"></div>
+                        </div>
+                        <p class="flag-note">Proudly serving all provinces of South Africa</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Contact CTA -->
+    <section class="quick-contact">
+        <div class="container">
+            <h2>Need Immediate Assistance?</h2>
+            <p>For urgent matters outside office hours, use our emergency contact options:</p>
+            <div class="quick-contact-buttons">
+                <a href="tel:0682357541" class="btn-emergency">
+                    <i class="fas fa-phone"></i> Emergency Call
+                </a>
+                <a href="https://wa.me/27682357541" target="_blank" class="btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> WhatsApp Now
+                </a>
+                <a href="mailto:support@umzukulufinder.co.za" class="btn-email">
+                    <i class="far fa-envelope"></i> Emergency Email
+                </a>
+            </div>
+            <p class="emergency-note"><i class="fas fa-exclamation-triangle"></i> Emergency line available 24/7 for urgent burial plot issues</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-monument"></i>
+                    <span>EternalRest</span>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="services.html">Services</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                </div>
+                <div class="footer-contact">
+                    <p><i class="fas fa-phone"></i> 011 234 5678</p>
+                    <p><i class="fab fa-whatsapp"></i> 068 235 7541</p>
+                    <p><i class="far fa-clock"></i> Mon-Fri: 09:00-17:00</p>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2023 EternalRest. All rights reserved. | support@umzukulufinder.co.za</p>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div class="modal" id="contactSuccessModal">
+        <div class="modal-content contact-modal">
+            <div class="modal-header">
+                <h3><i class="fas fa-check-circle"></i> Message Sent Successfully!</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Thank you for contacting EternalRest. We have received your message and will respond within the timeframe based on your selected urgency level.</p>
+                <div class="response-info">
+                    <p><strong>Reference Number:</strong> <span id="referenceNumber">ETR-2023-001</span></p>
+                    <p><strong>Expected Response:</strong> <span id="responseTime">Within 24 hours</span></p>
+                </div>
+                <div class="contact-options">
+                    <p>For immediate assistance, you can also:</p>
+                    <a href="https://wa.me/27682357541" target="_blank" class="btn-secondary">
+                        <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                    </a>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-primary" id="closeSuccessModal">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/contact.js"></script>
+</body>
+</html>
