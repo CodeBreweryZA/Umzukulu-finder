@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umzukulu^Finder - Find & Memorialize Burial Plots</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-monument"></i>
+                <span>Umzukulu^Finder</span>
+            </a>
+            <div class="nav-menu">
+                <a href="#features">Features</a>
+                <a href="services.html">Services</a>
+                <a href="contact.html">Contact</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#" class="btn-login" id="loginBtn">Sign In</a>
+                <a href="#" class="btn-primary" id="registerBtn">Get Started</a>
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Never Lose a Loved One's Resting Place Again</h1>
+            <p>Umzukulu^Finder helps you locate, memorialize, and maintain burial plots with our comprehensive digital platform and maintenance services.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn-primary btn-large" id="searchNowBtn">
+                    <i class="fas fa-search"></i> Search Now
+                </a>
+                <a href="#" class="btn-secondary btn-large" id="addMemorialBtn">
+                    <i class="fas fa-plus"></i> Add Memorial
+                </a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="mockup-container">
+                <div class="mockup-screen" id="mockupMap"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section" id="searchSection">
+        <div class="container">
+            <h2>Find a Burial Plot</h2>
+            <div class="search-card">
+                <div class="search-tabs">
+                    <button class="search-tab active" data-tab="name">Search by Name</button>
+                    <button class="search-tab" data-tab="location">Search by Location</button>
+                </div>
+                <div class="search-form">
+                    <!-- Name Search -->
+                    <div class="tab-content active" id="nameTab">
+                        <div class="form-group">
+                            <label for="deceasedName">Deceased Name</label>
+                            <input type="text" id="deceasedName" placeholder="Enter full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="surname">Surname/Family Name</label>
+                            <input type="text" id="surname" placeholder="Enter surname">
+                        </div>
+                        <button class="btn-primary" id="searchByName">
+                            <i class="fas fa-search"></i> Search Memorials
+                        </button>
+                    </div>
+                    
+                    <!-- Location Search -->
+                    <div class="tab-content" id="locationTab">
+                        <div class="form-group">
+                            <label for="locationInput">Location</label>
+                            <input type="text" id="locationInput" placeholder="Enter cemetery name or address">
+                        </div>
+                        <div class="form-group">
+                            <label>Or use current location:</label>
+                            <button class="btn-secondary" id="useCurrentLocation">
+                                <i class="fas fa-location-dot"></i> Use My Location
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <label for="coordinates">Or enter coordinates:</label>
+                            <div class="coordinates-input">
+                                <input type="text" id="latitude" placeholder="Latitude">
+                                <input type="text" id="longitude" placeholder="Longitude">
+                            </div>
+                        </div>
+                        <button class="btn-primary" id="searchByLocation">
+                            <i class="fas fa-map-marker-alt"></i> Search This Area
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add Memorial Modal -->
+    <div class="modal" id="addMemorialModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add a Memorial</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="memorialForm">
+                    <div class="form-group">
+                        <label for="memorialName">Deceased Full Name *</label>
+                        <input type="text" id="memorialName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="memorialSurname">Surname/Family Name *</label>
+                        <input type="text" id="memorialSurname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dateOfPassing">Date of Passing</label>
+                        <input type="date" id="dateOfPassing">
+                    </div>
+                    <div class="form-group">
+                        <label for="memorialMessage">Memorial Message</label>
+                        <textarea id="memorialMessage" rows="3" placeholder="Share a memory or message..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="memorialLocation">Location Details</label>
+                        <input type="text" id="memorialLocation" placeholder="Cemetery name, section, plot number">
+                    </div>
+                    <div class="form-group">
+                        <label>Plot Coordinates</label>
+                        <div class="coordinates-input">
+                            <input type="text" id="memorialLat" placeholder="Latitude">
+                            <input type="text" id="memorialLng" placeholder="Longitude">
+                        </div>
+                        <button type="button" class="btn-secondary" id="getCurrentLocation">
+                            <i class="fas fa-location-dot"></i> Use Current Location
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <label for="memorialPhoto">Add Photo (optional)</label>
+                        <input type="file" id="memorialPhoto" accept="image/*">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" id="cancelMemorial">Cancel</button>
+                        <button type="submit" class="btn-primary">Save Memorial</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login/Register Modal -->
+    <div class="modal" id="authModal">
+        <div class="modal-content auth-modal">
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Sign In</button>
+                <button class="auth-tab" data-tab="register">Create Account</button>
+            </div>
+            
+            <div class="tab-content active" id="loginTab">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" required>
+                    </div>
+                    <button type="submit" class="btn-primary btn-block">Sign In</button>
+                </form>
+                <div class="auth-divider">
+                    <span>Or continue with</span>
+                </div>
+                <button class="btn-social">
+                    <i class="fab fa-google"></i> Google
+                </button>
+            </div>
+            
+            <div class="tab-content" id="registerTab">
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="registerName">Full Name</label>
+                        <input type="text" id="registerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <input type="email" id="registerEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Password</label>
+                        <input type="password" id="registerPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" required>
+                    </div>
+                    <button type="submit" class="btn-primary btn-block">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2>Commemorate and Maintain with Ease</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Precise Location</h3>
+                    <p>Record exact coordinates of burial plots using GPS or manual entry. Never lose a location again.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-digital-tachograph"></i>
+                    </div>
+                    <h3>Digital Memorial</h3>
+                    <p>Create a digital memorial with photos, messages, and important dates to honor your loved ones.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Maintenance Services</h3>
+                    <p>Schedule regular plot maintenance, flower placement, and cleaning services directly through our platform.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Visit Confirmation</h3>
+                    <p>Confirm visits to burial sites with photo verification and share with family members.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2>How Umzukulu^Finder Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Create an Account</h3>
+                    <p>Sign up for free to start memorializing your loved ones.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Add Memorials</h3>
+                    <p>Add details about the deceased and the exact location of their burial plot.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Access Anytime</h3>
+                    <p>View all your memorials and their locations from your personal dashboard.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Use Services</h3>
+                    <p>Schedule maintenance, flowers, or confirmation visits through our services.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-monument"></i>
+                    <span>Umzukulu^Finder</span>
+                </div>
+                <div class="footer-links">
+                    <a href="services.html">Services</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                    <a href="#">Contact Us</a>
+                </div>
+                <div class="footer-install">
+                    <p>Install our app for easy access</p>
+                    <button class="btn-secondary" id="installAppBtn">
+                        <i class="fas fa-download"></i> Install App
+                    </button>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2023 Umzukulu^Finder. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/map.js"></script>
+</body>
+</html>
