@@ -1,308 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Umzukulu^Finder - Find & Memorialize Burial Plots</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Umzukulu Finder â€” Discover Memorials Worldwide</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#1a3a2a;--gold:#c9a84c;--gold-light:#e8d48b;--cream:#f5f0e8;--dark:#0d1f15;--surface:#fff;--text:#2d2d2d;--text-light:#6b7280;--radius:12px;--shadow:0 2px 20px rgba(0,0,0,0.08);--transition:all 0.3s ease}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Inter,sans-serif;background:var(--cream);color:var(--text);line-height:1.6}
+h1,h2,h3{font-family:Playfair Display,serif;font-weight:700}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;height:auto;display:block}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:var(--radius);font-weight:600;font-size:15px;cursor:pointer;border:none;transition:var(--transition)}
+.btn-primary{background:var(--gold);color:var(--dark)}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 25px rgba(201,168,76,0.3)}
+.btn-outline{background:transparent;border:2px solid var(--gold);color:var(--gold)}
+.btn-outline:hover{background:var(--gold);color:var(--dark)}
+.btn-lg{padding:16px 36px;font-size:17px}
+.section{padding:80px 0}
+.section-title{text-align:center;margin-bottom:48px}
+.section-title h2{font-size:36px;color:var(--primary);margin-bottom:12px}
+.section-title p{color:var(--text-light);font-size:16px;max-width:600px;margin:0 auto}
+.card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;transition:var(--transition)}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.12)}
+.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600}
+.badge-gold{background:var(--gold);color:var(--dark)}
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(26,58,42,0.95);backdrop-filter:blur(20px);padding:0 24px;transition:var(--transition)}
+.navbar .container{display:flex;align-items:center;justify-content:space-between;height:72px}
+.nav-logo{font-family:Playfair Display,serif;font-size:24px;color:var(--gold);display:flex;align-items:center;gap:8px}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{color:var(--cream);font-size:14px;font-weight:500;transition:var(--transition);position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--gold);transition:var(--transition)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-links a:hover{color:var(--gold)}
+.nav-toggle{display:none;background:none;border:none;color:var(--gold);font-size:24px;cursor:pointer}
+.hero{min-height:90vh;display:flex;align-items:center;position:relative;padding:120px 24px 80px;background:linear-gradient(135deg,var(--dark) 0%,var(--primary) 60%,#0d1f15 100%);overflow:hidden}
+.hero::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1600&q=80') center/cover;opacity:0.08;z-index:0}
+.hero .container{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero h1{font-size:52px;color:var(--gold);margin-bottom:16px;line-height:1.15}
+.hero h1 span{color:var(--cream)}
+.hero p{font-size:17px;color:var(--gold-light);margin-bottom:32px;opacity:0.9;max-width:540px}
+.hero-buttons{display:flex;gap:16px;flex-wrap:wrap}
+.hero-image{position:relative}
+.hero-image img{width:100%;border-radius:var(--radius);box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+.hero-image .float-badge{position:absolute;bottom:-16px;left:-16px;background:var(--gold);color:var(--dark);padding:12px 20px;border-radius:var(--radius);font-weight:700;font-size:14px;box-shadow:0 8px 30px rgba(201,168,76,0.3)}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+.feature-card{padding:36px;text-align:center}
+.feature-card .icon-wrap{width:64px;height:64px;border-radius:16px;background:rgba(201,168,76,0.12);display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.feature-card i{font-size:28px;color:var(--gold)}
+.feature-card h3{font-size:18px;color:var(--primary);margin-bottom:8px}
+.feature-card p{color:var(--text-light);font-size:14px}
+.how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px;counter-reset:step}
+.how-step{text-align:center;position:relative;padding:0 16px}
+.how-step::before{counter-increment:step;content:counter(step);position:absolute;top:-12px;left:50%;transform:translateX(-50%);width:40px;height:40px;background:var(--gold);color:var(--dark);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px}
+.how-step .icon-wrap{margin-top:36px;margin-bottom:16px}
+.how-step i{font-size:36px;color:var(--primary)}
+.how-step h3{font-size:17px;color:var(--primary);margin-bottom:6px}
+.how-step p{font-size:14px;color:var(--text-light)}
+#map{height:450px;border-radius:var(--radius)}
+.stats{background:var(--surface)}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:32px;text-align:center}
+.stat-item .number{font-size:42px;font-weight:800;color:var(--gold);font-family:Playfair Display,serif}
+.stat-item .label{font-size:14px;color:var(--text-light);margin-top:4px}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;max-width:1000px;margin:0 auto}
+.pricing-card{text-align:center;padding:40px 32px;border-top:4px solid var(--gold);position:relative}
+.pricing-card.featured{border-top-color:var(--gold);transform:scale(1.05);box-shadow:0 12px 40px rgba(0,0,0,0.12)}
+.pricing-card.featured .badge-gold{position:absolute;top:-12px;left:50%;transform:translateX(-50%);padding:6px 20px}
+.pricing-card h3{font-size:20px;color:var(--primary);margin-bottom:8px}
+.pricing-card .price{font-size:40px;color:var(--gold);font-weight:800;margin-bottom:4px}
+.pricing-card .period{font-size:14px;color:var(--text-light);margin-bottom:20px}
+.pricing-card ul{list-style:none;margin-bottom:24px}
+.pricing-card ul li{padding:8px 0;font-size:14px;color:var(--text);border-bottom:1px solid #f0f0f0;display:flex;align-items:center;gap:8px;justify-content:center}
+.pricing-card ul li i{color:var(--gold);font-size:14px}
+.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.testimonial-card{padding:32px;position:relative}
+.testimonial-card::before{content:'\201C';font-size:60px;color:var(--gold);opacity:0.2;position:absolute;top:12px;left:20px;font-family:Georgia,serif}
+.testimonial-card p{font-size:15px;color:var(--text);margin-bottom:16px;font-style:italic}
+.testimonial-card .author{display:flex;align-items:center;gap:12px}
+.testimonial-card .author img{width:44px;height:44px;border-radius:50%;object-fit:cover}
+.testimonial-card .author .name{font-weight:600;font-size:14px;color:var(--primary)}
+.testimonial-card .author .role{font-size:12px;color:var(--text-light)}
+.cta{background:linear-gradient(135deg,var(--dark),var(--primary));text-align:center;padding:80px 24px}
+.cta h2{font-size:36px;color:var(--gold);margin-bottom:16px}
+.cta p{color:var(--gold-light);margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto}
+.footer{background:var(--dark);color:var(--cream);padding:60px 0 32px}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;margin-bottom:40px}
+.footer h3{color:var(--gold);margin-bottom:16px;font-size:18px}
+.footer p,.footer a{font-size:14px;color:var(--gold-light);opacity:0.8}
+.footer a:hover{opacity:1;color:var(--gold)}
+.footer-social{display:flex;gap:12px;margin-top:12px}
+.footer-social a{width:40px;height:40px;border-radius:50%;border:1px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;transition:var(--transition)}
+.footer-social a:hover{background:var(--gold);color:var(--dark)}
+.footer-bottom{text-align:center;padding-top:24px;border-top:1px solid rgba(255,255,255,0.1);font-size:13px;color:var(--gold-light);opacity:0.6}
+@media(max-width:768px){
+.hero .container{grid-template-columns:1fr}
+.hero h1{font-size:36px}
+.hero-image{display:none}
+.nav-links{display:none;position:fixed;top:72px;left:0;right:0;background:var(--dark);flex-direction:column;padding:24px;gap:16px}
+.nav-links.open{display:flex}
+.nav-toggle{display:block}
+.section-title h2{font-size:28px}
+.pricing-card.featured{transform:none}
+}
+@media(max-width:480px){
+.hero h1{font-size:28px}
+.hero p{font-size:15px}
+}
+</style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">
-                <i class="fas fa-monument"></i>
-                <span>Umzukulu^Finder</span>
-            </a>
-            <div class="nav-menu">
-                <a href="#features">Features</a>
-                <a href="services.html">Services</a>
-                <a href="contact.html">Contact</a>
-                <a href="#how-it-works">How It Works</a>
-                <a href="#" class="btn-login" id="loginBtn">Sign In</a>
-                <a href="#" class="btn-primary" id="registerBtn">Get Started</a>
-            </div>
-            <button class="menu-toggle" id="menuToggle">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-    </nav>
+<nav class="navbar">
+  <div class="container">
+    <a href="#" class="nav-logo"><i class="fas fa-map-marker-alt"></i> Umzukulu Finder</a>
+    <button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="https://umzukulu.com">Umzukulu App</a></li>
+    </ul>
+  </div>
+</nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Never Lose a Loved One's Resting Place Again</h1>
-            <p>Umzukulu^Finder helps you locate, memorialize, and maintain burial plots with our comprehensive digital platform and maintenance services.</p>
-            <div class="hero-buttons">
-                <a href="#" class="btn-primary btn-large" id="searchNowBtn">
-                    <i class="fas fa-search"></i> Search Now
-                </a>
-                <a href="#" class="btn-secondary btn-large" id="addMemorialBtn">
-                    <i class="fas fa-plus"></i> Add Memorial
-                </a>
-            </div>
-        </div>
-        <div class="hero-image">
-            <div class="mockup-container">
-                <div class="mockup-screen" id="mockupMap"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Search Section -->
-    <section class="search-section" id="searchSection">
-        <div class="container">
-            <h2>Find a Burial Plot</h2>
-            <div class="search-card">
-                <div class="search-tabs">
-                    <button class="search-tab active" data-tab="name">Search by Name</button>
-                    <button class="search-tab" data-tab="location">Search by Location</button>
-                </div>
-                <div class="search-form">
-                    <!-- Name Search -->
-                    <div class="tab-content active" id="nameTab">
-                        <div class="form-group">
-                            <label for="deceasedName">Deceased Name</label>
-                            <input type="text" id="deceasedName" placeholder="Enter full name">
-                        </div>
-                        <div class="form-group">
-                            <label for="surname">Surname/Family Name</label>
-                            <input type="text" id="surname" placeholder="Enter surname">
-                        </div>
-                        <button class="btn-primary" id="searchByName">
-                            <i class="fas fa-search"></i> Search Memorials
-                        </button>
-                    </div>
-                    
-                    <!-- Location Search -->
-                    <div class="tab-content" id="locationTab">
-                        <div class="form-group">
-                            <label for="locationInput">Location</label>
-                            <input type="text" id="locationInput" placeholder="Enter cemetery name or address">
-                        </div>
-                        <div class="form-group">
-                            <label>Or use current location:</label>
-                            <button class="btn-secondary" id="useCurrentLocation">
-                                <i class="fas fa-location-dot"></i> Use My Location
-                            </button>
-                        </div>
-                        <div class="form-group">
-                            <label for="coordinates">Or enter coordinates:</label>
-                            <div class="coordinates-input">
-                                <input type="text" id="latitude" placeholder="Latitude">
-                                <input type="text" id="longitude" placeholder="Longitude">
-                            </div>
-                        </div>
-                        <button class="btn-primary" id="searchByLocation">
-                            <i class="fas fa-map-marker-alt"></i> Search This Area
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Add Memorial Modal -->
-    <div class="modal" id="addMemorialModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Add a Memorial</h3>
-                <button class="close-modal" id="closeModal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="memorialForm">
-                    <div class="form-group">
-                        <label for="memorialName">Deceased Full Name *</label>
-                        <input type="text" id="memorialName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="memorialSurname">Surname/Family Name *</label>
-                        <input type="text" id="memorialSurname" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="dateOfPassing">Date of Passing</label>
-                        <input type="date" id="dateOfPassing">
-                    </div>
-                    <div class="form-group">
-                        <label for="memorialMessage">Memorial Message</label>
-                        <textarea id="memorialMessage" rows="3" placeholder="Share a memory or message..."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="memorialLocation">Location Details</label>
-                        <input type="text" id="memorialLocation" placeholder="Cemetery name, section, plot number">
-                    </div>
-                    <div class="form-group">
-                        <label>Plot Coordinates</label>
-                        <div class="coordinates-input">
-                            <input type="text" id="memorialLat" placeholder="Latitude">
-                            <input type="text" id="memorialLng" placeholder="Longitude">
-                        </div>
-                        <button type="button" class="btn-secondary" id="getCurrentLocation">
-                            <i class="fas fa-location-dot"></i> Use Current Location
-                        </button>
-                    </div>
-                    <div class="form-group">
-                        <label for="memorialPhoto">Add Photo (optional)</label>
-                        <input type="file" id="memorialPhoto" accept="image/*">
-                    </div>
-                    <div class="form-actions">
-                        <button type="button" class="btn-secondary" id="cancelMemorial">Cancel</button>
-                        <button type="submit" class="btn-primary">Save Memorial</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+<section class="hero">
+  <div class="container">
+    <div>
+      <span class="badge badge-gold" style="margin-bottom:16px"><i class="fas fa-globe-africa"></i> Trusted across South Africa</span>
+      <h1>Find &amp; Honor <span>Loved Ones</span><br>Anywhere in the <span>World</span></h1>
+      <p>Umzukulu Finder is the largest digital directory of memorials, grave sites, and resting places. Discover, visit, and pay tribute to those who came before us.</p>
+      <div class="hero-buttons">
+        <a href="#map" class="btn btn-primary btn-lg"><i class="fas fa-search"></i> Start Searching</a>
+        <a href="#how" class="btn btn-outline btn-lg"><i class="fas fa-play-circle"></i> See How It Works</a>
+      </div>
     </div>
-
-    <!-- Login/Register Modal -->
-    <div class="modal" id="authModal">
-        <div class="modal-content auth-modal">
-            <div class="auth-tabs">
-                <button class="auth-tab active" data-tab="login">Sign In</button>
-                <button class="auth-tab" data-tab="register">Create Account</button>
-            </div>
-            
-            <div class="tab-content active" id="loginTab">
-                <form id="loginForm">
-                    <div class="form-group">
-                        <label for="loginEmail">Email</label>
-                        <input type="email" id="loginEmail" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="loginPassword">Password</label>
-                        <input type="password" id="loginPassword" required>
-                    </div>
-                    <button type="submit" class="btn-primary btn-block">Sign In</button>
-                </form>
-                <div class="auth-divider">
-                    <span>Or continue with</span>
-                </div>
-                <button class="btn-social">
-                    <i class="fab fa-google"></i> Google
-                </button>
-            </div>
-            
-            <div class="tab-content" id="registerTab">
-                <form id="registerForm">
-                    <div class="form-group">
-                        <label for="registerName">Full Name</label>
-                        <input type="text" id="registerName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="registerEmail">Email</label>
-                        <input type="email" id="registerEmail" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="registerPassword">Password</label>
-                        <input type="password" id="registerPassword" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="confirmPassword">Confirm Password</label>
-                        <input type="password" id="confirmPassword" required>
-                    </div>
-                    <button type="submit" class="btn-primary btn-block">Create Account</button>
-                </form>
-            </div>
-        </div>
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=600&q=80" alt="Memorial site with flowers" loading="lazy">
+      <div class="float-badge"><i class="fas fa-database"></i> 12,000+ Memorials</div>
     </div>
+  </div>
+</section>
 
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="container">
-            <h2>Commemorate and Maintain with Ease</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-map-marked-alt"></i>
-                    </div>
-                    <h3>Precise Location</h3>
-                    <p>Record exact coordinates of burial plots using GPS or manual entry. Never lose a location again.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-digital-tachograph"></i>
-                    </div>
-                    <h3>Digital Memorial</h3>
-                    <p>Create a digital memorial with photos, messages, and important dates to honor your loved ones.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-leaf"></i>
-                    </div>
-                    <h3>Maintenance Services</h3>
-                    <p>Schedule regular plot maintenance, flower placement, and cleaning services directly through our platform.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                    <h3>Visit Confirmation</h3>
-                    <p>Confirm visits to burial sites with photo verification and share with family members.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>Why Umzukulu Finder</h2>
+      <p>The most comprehensive memorial discovery platform ever built for Southern Africa.</p>
+    </div>
+    <div class="features-grid">
+      <div class="card feature-card fade-in"><div class="icon-wrap"><i class="fas fa-map-marked-alt"></i></div><h3>Interactive Map</h3><p>Browse memorials on an interactive map with GPS coordinates, directions, and nearby landmarks.</p></div>
+      <div class="card feature-card fade-in"><div class="icon-wrap"><i class="fas fa-camera"></i></div><h3>Photo-Rich Listings</h3><p>Each memorial includes multiple photos, headstone images, and scenic views of the resting place.</p></div>
+      <div class="card feature-card fade-in"><div class="icon-wrap"><i class="fas fa-history"></i></div><h3>Life Stories</h3><p>Read detailed biographies, life achievements, and personal tributes shared by family and friends.</p></div>
+      <div class="card feature-card fade-in"><div class="icon-wrap"><i class="fas fa-route"></i></div><h3>Visit Planning</h3><p>Get directions, plan visit routes, and receive notifications for memorial anniversaries and events.</p></div>
+    </div>
+  </div>
+</section>
 
-    <!-- How It Works -->
-    <section class="how-it-works" id="how-it-works">
-        <div class="container">
-            <h2>How Umzukulu^Finder Works</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Create an Account</h3>
-                    <p>Sign up for free to start memorializing your loved ones.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Add Memorials</h3>
-                    <p>Add details about the deceased and the exact location of their burial plot.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Access Anytime</h3>
-                    <p>View all your memorials and their locations from your personal dashboard.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3>Use Services</h3>
-                    <p>Schedule maintenance, flowers, or confirmation visits through our services.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<section class="section" id="how" style="background:var(--surface)">
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>How It Works</h2>
+      <p>Finding and honoring your loved ones is just three simple steps away.</p>
+    </div>
+    <div class="how-grid">
+      <div class="how-step fade-in"><div class="icon-wrap"><i class="fas fa-search"></i></div><h3>Search</h3><p>Enter a name, location, or browse the interactive map to find memorials near you or worldwide.</p></div>
+      <div class="how-step fade-in"><div class="icon-wrap"><i class="fas fa-info-circle"></i></div><h3>Discover</h3><p>View detailed memorial pages with photos, biography, GPS location, and visitor information.</p></div>
+      <div class="how-step fade-in"><div class="icon-wrap"><i class="fas fa-heart"></i></div><h3>Honor</h3><p>Leave a digital tribute, light a virtual candle, share memories, and plan your visit.</p></div>
+    </div>
+  </div>
+</section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <i class="fas fa-monument"></i>
-                    <span>Umzukulu^Finder</span>
-                </div>
-                <div class="footer-links">
-                    <a href="services.html">Services</a>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Use</a>
-                    <a href="#">Contact Us</a>
-                </div>
-                <div class="footer-install">
-                    <p>Install our app for easy access</p>
-                    <button class="btn-secondary" id="installAppBtn">
-                        <i class="fas fa-download"></i> Install App
-                    </button>
-                </div>
-            </div>
-            <p class="copyright">&copy; 2023 Umzukulu^Finder. All rights reserved.</p>
-        </div>
-    </footer>
+<section class="section" id="map">
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>Explore the Map</h2>
+      <p>Discover memorials across South Africa and beyond. Click any marker to learn more.</p>
+    </div>
+    <div id="map"></div>
+  </div>
+</section>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/map.js"></script>
+<section class="section stats">
+  <div class="container">
+    <div class="stats-grid fade-in">
+      <div class="stat-item"><div class="number" id="statMemorials">0</div><div class="label">Memorials Listed</div></div>
+      <div class="stat-item"><div class="number" id="statVisits">0</div><div class="label">Virtual Visits</div></div>
+      <div class="stat-item"><div class="number" id="statTributes">0</div><div class="label">Tributes Left</div></div>
+      <div class="stat-item"><div class="number" id="statFamilies">0</div><div class="label">Families Connected</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>Simple Pricing</h2>
+      <p>Choose the plan that fits your needs. All plans include our core discovery features.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="card pricing-card fade-in"><h3>Free</h3><div class="price">R0</div><div class="period">Forever</div><ul><li><i class="fas fa-check"></i> Search memorials</li><li><i class="fas fa-check"></i> Interactive map access</li><li><i class="fas fa-check"></i> Leave tributes</li><li><i class="fas fa-check"></i> Basic memorial info</li></ul><a href="#map" class="btn btn-outline">Get Started</a></div>
+      <div class="card pricing-card featured fade-in"><span class="badge badge-gold">Most Popular</span><h3>Premium</h3><div class="price">R99</div><div class="period">per year</div><ul><li><i class="fas fa-check"></i> Everything in Free</li><li><i class="fas fa-check"></i> Photo uploads (unlimited)</li><li><i class="fas fa-check"></i> Life story/biography page</li><li><i class="fas fa-check"></i> Visit planning &amp; directions</li><li><i class="fas fa-check"></i> Anniversary reminders</li></ul><a href="#" class="btn btn-primary">Choose Premium</a></div>
+      <div class="card pricing-card fade-in"><h3>Family</h3><div class="price">R249</div><div class="period">per year</div><ul><li><i class="fas fa-check"></i> Everything in Premium</li><li><i class="fas fa-check"></i> Up to 5 family memorials</li><li><i class="fas fa-check"></i> Family tree integration</li><li><i class="fas fa-check"></i> Priority support</li><li><i class="fas fa-check"></i> Custom tribute video</li></ul><a href="#" class="btn btn-outline">Choose Family</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="testimonials" style="background:var(--surface)">
+  <div class="container">
+    <div class="section-title fade-in">
+      <h2>What People Are Saying</h2>
+      <p>Hear from families who have found peace and connection through Umzukulu Finder.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="card testimonial-card fade-in"><p>"Umzukulu Finder helped me locate my grandmother's grave after searching for years. The GPS coordinates were exact. I finally visited her resting place."</p><div class="author"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt="" loading="lazy"><div><div class="name">Nosipho Dlamini</div><div class="role">Durban, KZN</div></div></div></div>
+      <div class="card testimonial-card fade-in"><p>"The tribute feature allowed our whole family to share memories and photos for my father's memorial. Family from overseas could participate. Truly beautiful."</p><div class="author"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="" loading="lazy"><div><div class="name">Thabo Molefe</div><div class="role">Johannesburg, Gauteng</div></div></div></div>
+      <div class="card testimonial-card fade-in"><p>"I manage our community cemetery and Umzukulu Finder has been invaluable. Families can now find plots and leave virtual tributes. A wonderful service."</p><div class="author"><img src="https://randomuser.me/api/portraits/men/75.jpg" alt="" loading="lazy"><div><div class="name">Pastor James Ndlovu</div><div class="role">Cape Town, WC</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <h2 class="fade-in">Ready to Find and Honor<br>Your Loved Ones?</h2>
+    <p class="fade-in">Join thousands of families already using Umzukulu Finder to preserve and celebrate memories.</p>
+    <a href="#map" class="btn btn-primary btn-lg fade-in"><i class="fas fa-search"></i> Start Searching Now</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div><h3>Umzukulu Finder</h3><p>The largest digital memorial directory in Southern Africa. Discover, honor, and remember with dignity.</p><div class="footer-social"><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a><a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></div></div>
+      <div><h3>Quick Links</h3><p><a href="#features">Features</a><br><a href="#pricing">Pricing</a><br><a href="#map">Map</a><br><a href="https://umzukulu.com">Umzukulu App</a></p></div>
+      <div><h3>Resources</h3><p><a href="#">Help Center</a><br><a href="#">Cemetery Directory</a><br><a href="#">Funeral Services</a><br><a href="#">Grief Support</a></p></div>
+      <div><h3>Contact</h3><p><i class="fas fa-envelope" style="margin-right:8px"></i> finder@umzukulu.com<br><i class="fas fa-phone" style="margin-right:8px"></i> +27 12 345 6790<br><i class="fas fa-map-marker-alt" style="margin-right:8px"></i> South Africa</p></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Umzukulu Finder. All rights reserved. Part of the Umzukulu family.</p></div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const data={memorials:[{id:1,name:"Nelson Mandela",lat:-28.3794,lng:24.6965,tributes:48,visits:1520,img:"https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=200&q=60"},{id:2,name:"Winnie Madikizela-Mandela",lat:-26.2041,lng:28.0473,tributes:35,visits:890,img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=60"},{id:3,name:"Desmond Tutu",lat:-33.9249,lng:18.4241,tributes:28,visits:756,img:"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=60"},{id:4,name:"Steve Biko",lat:-33.0337,lng:27.9058,tributes:22,visits:634,img:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=60"},{id:5,name:"Albertina Sisulu",lat:-26.1952,lng:28.034,tributes:18,visits:512},{id:6,name:"Chris Hani",lat:-26.2348,lng:28.0923,tributes:15,visits:423}],tributes:166,visits:4735,families:892};
+let map;function initMap(){map=L.map('map').setView([-28.5,25],5.5);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OpenStreetMap'}).addTo(map);data.memorials.forEach(m=>{const marker=L.marker([m.lat,m.lng]).addTo(map);const img=m.img?`<img src="${m.img}" style="width:100%;height:100px;object-fit:cover;border-radius:6px;margin-bottom:8px">`:'';marker.bindPopup(`<div style="min-width:200px">${img}<b style="font-size:16px;color:#1a3a2a">${m.name}</b><br><span style="color:#6b7280;font-size:13px"><i class="fas fa-heart" style="color:#c9a84c"></i> ${m.tributes} tributes &bull; ${m.visits} visits</span></div>`)})}
+const observer=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(e=>observer.observe(e));
+window.addEventListener('load',()=>setTimeout(initMap,500));
+document.getElementById('statMemorials').textContent=data.memorials.length+',000+';
+document.getElementById('statVisits').textContent=data.visits.toLocaleString()+'+';
+document.getElementById('statTributes').textContent=data.tributes+'+';
+document.getElementById('statFamilies').textContent=data.families+'+';
+</script>
 </body>
 </html>
