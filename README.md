@@ -1,4 +1,4 @@
-# Umzukulu Finder ðŸ”
+# Umzukulu Finder 
 
 The largest digital memorial directory in Southern Africa. Discover, locate, and honor loved ones through an interactive map and comprehensive memorial listings.
 
